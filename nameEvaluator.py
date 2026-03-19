@@ -4,13 +4,8 @@ from PIL import Image, ImageTk
 
 def loadImage(path):
     img = Image.open(path)
-    img = img.resize((120, 120))
+    img = img.resize((180, 180))
     return ImageTk.PhotoImage(img)
-
-# Preload images
-happyFace = loadImage("happy.webp")
-neutralFace = loadImage("neutral.png")
-sadFace = loadImage("sad.jpg")
 
 def gradeName():
     name = entry.get()
@@ -41,17 +36,24 @@ def gradeName():
     image_label.image = img
 
 root = tk.Tk()
-root.geometry("400x400")
+root.geometry("500x500")
 
-entry = tk.Entry(root)
-entry.pack(pady=10)
+happyFace = loadImage("images/happy.webp")
+neutralFace = loadImage("images/neutral.png")
+sadFace = loadImage("images/sad.jpg")
 
-tk.Button(root, text="Grade", command=gradeName).pack()
+tk.Label(root, text="Name Grader", font=("Arial", 20)).pack(pady=10)
 
-result_label = tk.Label(root, text="")
-result_label.pack(pady=10)
+entry = tk.Entry(root, font=("Arial", 16), width=20)
+entry.pack(pady=15)
+
+tk.Button(root, text="Grade", command=gradeName,
+          font=("Arial", 14), width=15, height=2).pack(pady=10)
+
+result_label = tk.Label(root, text="", font=("Arial", 14))
+result_label.pack(pady=15)
 
 image_label = tk.Label(root)
-image_label.pack(pady=10)
+image_label.pack(pady=15)
 
 root.mainloop()
